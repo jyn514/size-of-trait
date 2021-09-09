@@ -1,0 +1,11 @@
+[package]
+name = "size-of-trait"
+version = "1.0.0"
+edition = "2018"
+description = "determine the size of a future or trait impl at compile time"
+license = "BSD-3-Clause"
+repository = "https://github.com/jyn514/size-of-trait"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
