@@ -32,19 +32,9 @@ macro_rules! size_of {
 
 #[doc(hidden)]
 pub mod private {
-    use core::marker::PhantomData;
-
     #[doc(hidden)]
     pub const fn helper<T> (_: [impl FnOnce() -> [T; 0]; 0]) -> usize {
         ::core::mem::size_of::<T>()
-    }
-
-    #[doc(hidden)]
-    pub struct Ty<F: FnOnce() -> R, R>(pub F, pub PhantomData<R>);
-
-    #[doc(hidden)]
-    pub const fn size<R>(_: PhantomData<R>) -> usize {
-        core::mem::size_of::<R>()
     }
 }
 
@@ -53,7 +43,7 @@ pub mod private {
 #[doc(hidden)]
 macro_rules! size_of_future {
     ($fut: expr) => {
-        $crate::size_of_trait_impl!($fut, ::core::future::Future)
+        $crate::size_of!($fut)
     };
 }
 
