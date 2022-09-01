@@ -1,6 +1,6 @@
 [package]
 name = "size-of-trait"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2018"
 description = "determine the size of a future or trait impl at compile time"
 license = "BSD-3-Clause"
