@@ -1,5 +1,6 @@
 #![allow(dead_code, unused_variables)]
 
+extern crate alloc;
 use core::ops::Generator;
 
 trait Foo<'a, 'b> {}
@@ -10,14 +11,14 @@ fn g() -> impl for<'a> Foo<'a, 'static> {}
 
 async fn f() {
     let x = 1;
-    std::future::ready(()).await;
+    core::future::ready(()).await;
     let y = 2;
 }
 
 fn h() -> impl Generator<Return = u32> {
     || {
-        let a = vec![0];
-        let b = String::new();
+        let a = alloc::vec![0];
+        let b = alloc::string::String::new();
         yield a;
         0
     }

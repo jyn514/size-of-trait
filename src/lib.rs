@@ -1,4 +1,5 @@
-// #![doc = include_str!("../README.md")]
+#![no_std]
+#![doc = include_str!("../README.md")]
 #![cfg_attr(test, feature(generators, generator_trait))]
 
 /// Given an expression, return the size of its type.

@@ -29,7 +29,7 @@ async fn f() {
 
 ```rust,compile_fail,E0015,E0493
 #![feature(const_size_of_val)]
-async fn foo() {} // error: cannont call non-const fn `foo` in constants
+async fn foo() {} // error: cannot call non-const fn `foo` in constants
 const SIZE: usize = std::mem::size_of_val(&foo()); // error: constants cannot evaluate destructors
 ```
 
