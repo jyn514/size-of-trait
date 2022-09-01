@@ -54,3 +54,28 @@ fn original_api() {
     assert_eq!(F, 8);
     assert_eq!(G, 32);
 }
+
+#[test]
+fn edge_cases() {
+    use ::core::mem::size_of;
+
+    // 1. works with references:
+    const _: [(); size_of!(&Some(42))] = [(); size_of::<*const ()>()];
+    let _ = size_of!(&Some(42));
+
+    // 2. works with temporaries:
+    const _: [(); size_of!(Some(drop(())).as_ref())] = [(); size_of::<*const ()>()];
+    let _ = size_of!(Some(drop(())).as_ref());
+
+    // 3. Does not move the named stuff
+    struct NotCopy {}
+    let it = NotCopy {};
+    assert_eq!(size_of!(it), 0);
+    drop(it);
+
+    // 4. Does not even borrow the named stuff
+    let mut it = ();
+    let r = &mut it;
+    assert_eq!(size_of!(it), 0);
+    drop(r);
+}
