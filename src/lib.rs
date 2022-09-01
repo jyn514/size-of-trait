@@ -18,15 +18,26 @@
 /// ```
 #[macro_export]
 macro_rules! size_of {
-    ($f: expr) => {{
-        let phantom = $crate::private::Ty(move || $f, ::core::marker::PhantomData).1;
-        $crate::private::size(phantom)
-    }};
+    ($f: expr) => {
+        $crate::private::helper(if true {
+            []
+        } else {
+            loop {}
+            #[allow(unreachable_code)] {
+                [|| [$f; 0]; 0]
+            }
+        })
+    };
 }
 
 #[doc(hidden)]
 pub mod private {
     use core::marker::PhantomData;
+
+    #[doc(hidden)]
+    pub const fn helper<T> (_: [impl FnOnce() -> [T; 0]; 0]) -> usize {
+        ::core::mem::size_of::<T>()
+    }
 
     #[doc(hidden)]
     pub struct Ty<F: FnOnce() -> R, R>(pub F, pub PhantomData<R>);
