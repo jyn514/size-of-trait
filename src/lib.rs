@@ -23,7 +23,8 @@ macro_rules! size_of {
             []
         } else {
             loop {}
-            #[allow(unreachable_code)] {
+            #[allow(unreachable_code)]
+            {
                 [|| [$f; 0]; 0]
             }
         })
@@ -33,7 +34,7 @@ macro_rules! size_of {
 #[doc(hidden)]
 pub mod private {
     #[doc(hidden)]
-    pub const fn helper<T> (_: [impl FnOnce() -> [T; 0]; 0]) -> usize {
+    pub const fn helper<T>(_: [impl FnOnce() -> [T; 0]; 0]) -> usize {
         ::core::mem::size_of::<T>()
     }
 }
