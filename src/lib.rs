@@ -17,7 +17,7 @@
 /// assert_eq!(SIZE, 2);
 /// ```
 ///
-/// Runtime values, such as variables, cannot be used in const expressions:
+/// Local bindings cannot be used in const expressions:
 /// ```compile_fail,E0435
 /// # use size_of_trait::size_of;
 /// let x = 1;
