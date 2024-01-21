@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_variables)]
 
 extern crate alloc;
-use core::ops::Generator;
+use core::ops::Coroutine;
 
 trait Foo<'a, 'b> {}
 impl<'a> Foo<'a, 'static> for () {}
@@ -15,7 +15,7 @@ async fn f() {
     let y = 2;
 }
 
-fn h() -> impl Generator<Return = u32> {
+fn h() -> impl Coroutine<Return = u32> {
     || {
         let a = alloc::vec![0];
         let b = alloc::string::String::new();
@@ -31,12 +31,15 @@ fn new_api() {
     const E: usize = size_of!(());
     const F: usize = size_of!(0_usize);
     const G: usize = size_of!(h());
+    let b = 0_u8;
+    let H: usize = size_of!(b);
 
     assert_eq!(C, 2);
     assert_eq!(D, 1);
     assert_eq!(E, 0);
     assert_eq!(F, 8);
     assert_eq!(G, 32);
+    assert_eq!(H, 1);
 }
 
 #[test]

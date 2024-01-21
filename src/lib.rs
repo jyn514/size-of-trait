@@ -1,6 +1,6 @@
 #![no_std]
 #![doc = include_str!("../README.md")]
-#![cfg_attr(test, feature(generators, generator_trait))]
+#![cfg_attr(test, feature(coroutines, coroutine_trait))]
 
 /// Given an expression, return the size of its type.
 ///
@@ -15,6 +15,20 @@
 /// }
 /// const SIZE: usize = size_of!(f());
 /// assert_eq!(SIZE, 2);
+/// ```
+///
+/// Runtime values, such as variables, cannot be used in const expressions:
+/// ```compile_fail,E0435
+/// # use size_of_trait::size_of;
+/// let x = 1;
+/// const SIZE: usize = size_of!(x);
+/// ```
+/// but you can still use `size_of_val`, or a `let` binding:
+/// ```
+/// # use size_of_trait::size_of;
+/// let x = 1;
+/// let SIZE1 = size_of!(x);
+/// let SIZE2 = std::mem::size_of_val(&x);
 /// ```
 #[macro_export]
 macro_rules! size_of {
