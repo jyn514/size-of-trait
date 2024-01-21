@@ -32,14 +32,14 @@ fn new_api() {
     const F: usize = size_of!(0_usize);
     const G: usize = size_of!(h());
     let b = 0_u8;
-    let H: usize = size_of!(b);
+    let h: usize = size_of!(b);
 
     assert_eq!(C, 2);
     assert_eq!(D, 1);
     assert_eq!(E, 0);
     assert_eq!(F, 8);
     assert_eq!(G, 32);
-    assert_eq!(H, 1);
+    assert_eq!(h, 1);
 }
 
 #[test]
@@ -59,6 +59,7 @@ fn original_api() {
 }
 
 #[test]
+#[allow(dropping_copy_types, dropping_references)]
 fn edge_cases() {
     use ::core::mem::size_of;
 
