@@ -16,6 +16,7 @@ async fn f() {
 }
 
 fn h() -> impl Coroutine<Return = u32> {
+    #[coroutine]
     || {
         let a = alloc::vec![0];
         let b = alloc::string::String::new();
